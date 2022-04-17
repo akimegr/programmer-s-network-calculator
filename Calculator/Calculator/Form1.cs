@@ -375,7 +375,7 @@ namespace Calculator
             {
                 p = textBox1.Text;
                 textBox1.Clear();
-                count = 1;
+                count = 2;
                 label1.Text = p.ToString() + "-";
                 znak = true;
             }
@@ -402,7 +402,7 @@ namespace Calculator
             {
                 p = textBox1.Text;
                 textBox1.Clear();
-                count = 1;
+                count = 3;
                 label1.Text = p.ToString() + "*";
                 znak = true;
             }
@@ -429,7 +429,7 @@ namespace Calculator
             {
                 p = textBox1.Text;
                 textBox1.Clear();
-                count = 1;
+                count = 4;
                 label1.Text = p.ToString() + "/";
                 znak = true;
             }
