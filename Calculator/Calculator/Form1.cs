@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Calculator
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
         }
+        static int remotePort; // Порт для отправки сообщений
+        IPAddress ipAddress; // IP адрес сервера
+        static Socket listeningSocket; // Сокет
+
 
         int checkRegim = 1;
         double a, b;
@@ -199,7 +209,19 @@ namespace Calculator
                 textBox1.Text = textBox1.Text;
                 return;
             }
-            float partTwo;
+
+            float partTwo = float.Parse(textBox1.Text);
+            string forSend = a.ToString();
+            forSend += "&";
+            forSend += count.ToString();
+            forSend += "&";
+            forSend += textBox1.Text;
+            forSend += "&";
+            forSend += flagSystemAfter.ToString();
+
+            label4.Text = forSend;
+
+
             if (flagSystemAfter == 10)
             {
                 partTwo = float.Parse(textBox1.Text);
@@ -252,14 +274,14 @@ namespace Calculator
                         {
                             if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
                             {
-                                
+
                                 MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
                                 return;
                             }
                         }
                     }
                     long temp1 = Convert.ToInt64(textBox1.Text, flagSystemAfter);
-                    long temp2 = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length-1), flagSystemAfter);
+                    long temp2 = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
                     long zo = 0;
                     switch (count)
                     {
@@ -496,6 +518,217 @@ namespace Calculator
             flagSystemAfter = 10;
         }
 
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("Введите ip, порт!");
+
+            List<string> list = new List<string>();
+
+
+            try
+            {
+                listeningSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp); // Создание сокета
+                Task listeningTask = new Task(Listen); // Создание потока
+                listeningTask.Start(); // Запуск потока
+                ipAddress = IPAddress.Parse(IP.Text);
+                remotePort = Int32.Parse(PORT.Text);
+
+                while (true) // Отправление сообщений серверу в бесконечном цикле
+                {
+
+                    float partTwo = float.Parse(textBox1.Text);
+                    string forSend = a.ToString();
+                    forSend += "&";
+                    forSend += count.ToString();
+                    forSend += "&";
+                    forSend += textBox1.Text;
+                    forSend += "&";
+                    forSend += flagSystemAfter.ToString();
+
+                    label4.Text = forSend;
+
+                    string message = forSend;
+                    byte[] data = Encoding.Unicode.GetBytes(message);
+                    EndPoint remotePoint = new IPEndPoint(ipAddress, remotePort);
+                    listeningSocket.SendTo(data, remotePoint);
+
+                    StringBuilder builder = new StringBuilder(); // получаем сообщение
+                    int bytes = 0; // количество полученных байтов
+                    byte[] data2 = new byte[256]; // буфер для получаемых данных
+                    EndPoint remoteIp = new IPEndPoint(ipAddress, 0); //адрес, с которого пришли данные
+
+                    do
+                    {
+                        bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
+                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                    }
+                    while (listeningSocket.Available > 0);
+                    MessageBox.Show(builder.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Close();
+            }
+
+
+        }
+
+        private static void Listen()
+        {
+            try
+            {
+                IPEndPoint localIP = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 0); // Прослушиваем по адресу
+                listeningSocket.Bind(localIP);
+
+                while (true)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    int bytes = 0;
+                    byte[] data = new byte[256];
+
+                    EndPoint remoteIp = new IPEndPoint(IPAddress.Any, 0);
+
+                    do
+                    {
+                        bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
+                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                    }
+                    while (listeningSocket.Available > 0);
+
+                    IPEndPoint remoteFullIp = remoteIp as IPEndPoint;
+
+                    Console.WriteLine("{0}:{1} - {2}", remoteFullIp.Address.ToString(), remoteFullIp.Port, builder.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        // закрытие сокета
+        private static void Close()
+        {
+            if (listeningSocket != null)
+            {
+                listeningSocket.Shutdown(SocketShutdown.Both);
+                listeningSocket.Close();
+                listeningSocket = null;
+            }
+
+            Console.WriteLine("Сервер остановлен!");
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                listeningSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp); // Создание сокета
+
+                ipAddress = IPAddress.Parse(IP.Text);
+                remotePort = Int32.Parse(PORT.Text);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("", "Вы ввели " + flagSystemAfter + "-ичное число?", MessageBoxButtons.YesNo);
+            float checkTwoPart = float.Parse(textBox1.Text);
+            if (dialogResult == DialogResult.Yes)
+            {
+                for (int i = 0; i < textBox1.Text.Length; i++)
+                {
+                    if (flagSystemAfter == 16)
+                    {
+                        int Num;
+                        bool isNum = int.TryParse(textBox1.Text[i].ToString(), out Num);
+                        if (!isNum && (textBox1.Text[i].ToString().ToUpper() != "A" || textBox1.Text[i].ToString().ToUpper() != "B"
+                            || textBox1.Text[i].ToString().ToUpper() != "C" || textBox1.Text[i].ToString().ToUpper() != "D" || textBox1.Text[i].ToString().ToUpper() != "E" || textBox1.Text[i].ToString().ToUpper() != "F"))
+                        {
+                            MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                            return;
+                        }
+
+
+                    }
+                    else
+                    {
+                        if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
+                        {
+
+                            MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                            return;
+                        }
+                    }
+                }
+                checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
+            }
+            try
+            {
+                float partTwo = float.Parse(textBox1.Text);
+                string forSend = a.ToString();
+                forSend += "&";
+                forSend += count.ToString();
+                forSend += "&";
+                forSend += checkTwoPart;
+                forSend += "&";
+                forSend += flagSystemAfter.ToString();
+
+                label4.Text = forSend;
+
+                string message = forSend;
+                byte[] data = Encoding.Unicode.GetBytes(message);
+                EndPoint remotePoint = new IPEndPoint(ipAddress, remotePort);
+                listeningSocket.SendTo(data, remotePoint);
+
+                StringBuilder builder = new StringBuilder(); // получаем сообщение
+                int bytes = 0; // количество полученных байтов
+                byte[] data2 = new byte[256]; // буфер для получаемых данных
+                EndPoint remoteIp = new IPEndPoint(ipAddress, 0); //адрес, с которого пришли данные
+
+                do
+                {
+                    bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
+                    builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                }
+                while (listeningSocket.Available > 0);
+                MessageBox.Show(builder.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             int lenght = textBox1.Text.Length - 1;
@@ -509,4 +742,5 @@ namespace Calculator
 
 
     }
+
 }

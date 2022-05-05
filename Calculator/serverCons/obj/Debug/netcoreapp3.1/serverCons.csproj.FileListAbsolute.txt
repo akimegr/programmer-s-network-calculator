@@ -1,0 +1,13 @@
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\bin\Debug\netcoreapp3.1\serverCons.exe
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\bin\Debug\netcoreapp3.1\serverCons.deps.json
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\bin\Debug\netcoreapp3.1\serverCons.runtimeconfig.json
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\bin\Debug\netcoreapp3.1\serverCons.runtimeconfig.dev.json
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\bin\Debug\netcoreapp3.1\serverCons.dll
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\bin\Debug\netcoreapp3.1\serverCons.pdb
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.csprojAssemblyReference.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.AssemblyInfoInputs.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.AssemblyInfo.cs
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.csproj.CoreCompileInputs.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.dll
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.pdb
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCons\obj\Debug\netcoreapp3.1\serverCons.genruntimeconfig.cache

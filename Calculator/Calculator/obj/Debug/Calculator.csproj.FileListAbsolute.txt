@@ -17,3 +17,13 @@ C:\Users\akime\Downloads\п\Calculator-Win-Forms\Calculator\Calculator\obj\Debug
 C:\Users\akime\Downloads\п\Calculator-Win-Forms\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
 C:\Users\akime\Downloads\п\Calculator-Win-Forms\Calculator\Calculator\obj\Debug\Calculator.exe
 C:\Users\akime\Downloads\п\Calculator-Win-Forms\Calculator\Calculator\obj\Debug\Calculator.pdb
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.csprojAssemblyReference.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.Form1.resources
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.Properties.Resources.resources
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResource.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.exe
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\obj\Debug\Calculator.pdb
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\bin\Debug\Calculator.exe.config
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\bin\Debug\Calculator.exe
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\Calculator\bin\Debug\Calculator.pdb

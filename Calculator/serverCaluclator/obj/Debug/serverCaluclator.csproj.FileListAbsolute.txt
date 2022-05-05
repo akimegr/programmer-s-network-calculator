@@ -1,0 +1,10 @@
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.csprojAssemblyReference.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.Form1.resources
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.Properties.Resources.resources
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.csproj.GenerateResource.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.csproj.CoreCompileInputs.cache
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\bin\Debug\serverCaluclator.exe.config
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\bin\Debug\serverCaluclator.exe
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\bin\Debug\serverCaluclator.pdb
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.exe
+C:\Users\akime\OneDrive\Документы\GitHub\programmer-s-network-calculator\Calculator\serverCaluclator\obj\Debug\serverCaluclator.pdb
