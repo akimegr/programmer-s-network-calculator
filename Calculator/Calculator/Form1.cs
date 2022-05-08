@@ -28,10 +28,156 @@ namespace Calculator
         int flagSystemSS = 10;
         int flagSystemAfter = 10;
 
+        string converToTenWithDouble(string text)
+        {
+            double text1;
+            string ttt = text.Split(',')[0];
+            text1 = Convert.ToDouble(ttt);
+            string zel;
+            long temp;
+            temp = Convert.ToInt64(ttt, flagSystemAfter);
+            zel = temp.ToString() + ",";
+            string textZ = text.Split(',')[1];
+            int size = textZ.ToString().Length - 1;
+            string forFor = textZ.ToString();
+            double fff = 0;
+            for (int z = 0; z < forFor.Length; z++)
+            {
+                if (flagSystemAfter == 16)
+                {
+                    if (forFor[z].ToString().ToUpper() == "A") {
+                        fff += (10 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "B") {
+                        fff += (11 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "C") {
+                        fff += (12 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "D") {
+                        fff += (13 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "E") {
+                        fff += (14 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "F") {
+                        fff += (15 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                }
+                fff += (int.Parse(forFor[z].ToString()) * Math.Pow(flagSystemAfter, -(z + 1)));
+            }
+            double myRes = Math.Round((temp + fff), 10);
+            return myRes.ToString();
+        }
+
+        string withDouble(string text, int ss, int after)
+        {
+            if (flagSystemAfter != 10)
+            {
+                text = converToTenWithDouble(textBox1.Text);
+            }
+            double text1;
+            text1 = Convert.ToDouble(text);
+            string zel;
+            long temp;
+            if (ss == 10)
+            {
+                return converToTenWithDouble(textBox1.Text);
+            }
+            else {
+                zel = Convert.ToString(Convert.ToInt32(Math.Truncate(text1)), ss); 
+            }
+            int zel1 = Convert.ToInt32(Math.Truncate(text1));
+            // дробную часть
+            double text2;
+            text2 = text1 - Math.Truncate(text1);
+            int cc;
+            cc = ss;
+            double[] asd = new double[10];
+            asd[0] = text2;
+
+            string drob = null;
+
+            for (int i = 1; i < 10; i++)
+            {
+                switch (cc)
+                {
+                    case 2:
+                        asd[i] = (2 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 2);
+                        int bin = Convert.ToInt32(Math.Truncate(asd[i - 1] * 2));
+                        drob += bin;
+                        break;
+                    case 8:
+                        asd[i] = (8 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 8);
+                        double oct = Math.Truncate(asd[i - 1] * 8);
+                        drob += oct;
+                        break;
+                    case 10:
+                        asd[i] = (10 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 10);
+                        double dec = Math.Truncate(asd[i - 1] * 10);
+                        drob += dec;
+                        break;
+                    case 16:
+                        asd[i] = (16 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 16);
+                        string hex;
+                        hex = Convert.ToString(Math.Truncate(asd[i - 1] * 16));
+
+                        int ze;
+                        ze = Convert.ToInt32(hex);
+
+                        switch (ze)
+                        {
+                            case 10:
+                                hex = "A";
+                                break;
+                            case 11:
+                                hex = "B";
+                                break;
+                            case 12:
+                                hex = "C";
+                                break;
+                            case 13:
+                                hex = "D";
+                                break;
+                            case 14:
+                                hex = "E";
+                                break;
+                            case 15:
+                                hex = "F";
+                                break;
+                            default:
+                                break;
+                        }
+                        drob += hex;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+            flagSystemAfter = cc;
+            string r = zel + "," + drob;
+            return r;
+
+        }
+
         void changeInSS(int ss)
         {
             try
             {
+                if (textBox1.Text.Split(',').Length == 2)
+                {
+                    textBox1.Text = withDouble(textBox1.Text, ss, flagSystemAfter);
+                    radioButton2.Checked = true;
+                    flagSystemAfter = ss;
+                    return;
+                }
                 long temp = Convert.ToInt64(textBox1.Text, flagSystemAfter);
                 textBox1.Text = Convert.ToString(temp, ss);
                 flagSystemAfter = ss;
@@ -684,7 +830,10 @@ namespace Calculator
             }
             else if (dialogResult == DialogResult.No)
             {
-                checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                long convertTwoPart = long.Parse(textBox1.Text);
+                string convertMy = Convert.ToString(convertTwoPart, flagSystemAfter);
+                checkTwoPart = float.Parse(convertMy);
+                //checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
                 a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
             }
             try

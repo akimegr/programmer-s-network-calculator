@@ -115,14 +115,15 @@ namespace serverCons
                 default:
                     break;
             }
+            long resultL = (long)(result);
             if (flagSystemAfter == 10)
             {
                 BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
             }
             else
             {
-                result = Convert.ToInt64(result.ToString(), flagSystemAfter);
-                BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                string result1 = Convert.ToString(resultL, flagSystemAfter);
+                BroadcastMessage(result1, remoteFullIp.Address.ToString());
             }
         }
 
