@@ -122,9 +122,99 @@ namespace serverCons
             }
             else
             {
-                string result1 = Convert.ToString(resultL, flagSystemAfter);
-                BroadcastMessage(result1, remoteFullIp.Address.ToString());
+                if (result.ToString().Split(',').Length==1)
+                {
+                    string result1 = Convert.ToString(resultL, flagSystemAfter);
+                    BroadcastMessage(result1, remoteFullIp.Address.ToString());
+                }
+                else
+                {
+                    string result1 = withDouble(result.ToString(), flagSystemAfter);
+                    BroadcastMessage(result1, remoteFullIp.Address.ToString());
+                }
             }
+        }
+
+
+        static string withDouble(string text, int ss)
+        {
+            double text1;
+            text1 = Convert.ToDouble(text);
+            string zel;
+            long temp;
+                zel = Convert.ToString(Convert.ToInt32(Math.Truncate(text1)), ss);
+            
+            int zel1 = Convert.ToInt32(Math.Truncate(text1));
+            // дробную часть
+            double text2;
+            text2 = text1 - Math.Truncate(text1);
+            int cc;
+            cc = ss;
+            double[] asd = new double[10];
+            asd[0] = text2;
+
+            string drob = null;
+
+            for (int i = 1; i < 5; i++)
+            {
+                switch (cc)
+                {
+                    case 2:
+                        asd[i] = (2 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 2);
+                        int bin = Convert.ToInt32(Math.Truncate(asd[i - 1] * 2));
+                        drob += bin;
+                        break;
+                    case 8:
+                        asd[i] = (8 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 8);
+                        double oct = Math.Truncate(asd[i - 1] * 8);
+                        drob += oct;
+                        break;
+                    case 10:
+                        asd[i] = (10 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 10);
+                        double dec = Math.Truncate(asd[i - 1] * 10);
+                        drob += dec;
+                        break;
+                    case 16:
+                        asd[i] = (16 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 16);
+                        string hex;
+                        hex = Convert.ToString(Math.Truncate(asd[i - 1] * 16));
+
+                        int ze;
+                        ze = Convert.ToInt32(hex);
+
+                        switch (ze)
+                        {
+                            case 10:
+                                hex = "A";
+                                break;
+                            case 11:
+                                hex = "B";
+                                break;
+                            case 12:
+                                hex = "C";
+                                break;
+                            case 13:
+                                hex = "D";
+                                break;
+                            case 14:
+                                hex = "E";
+                                break;
+                            case 15:
+                                hex = "F";
+                                break;
+                            default:
+                                break;
+                        }
+                        drob += hex;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+            string r = zel + "," + drob;
+            return r;
+
         }
 
         // Метод для рассылки сообщений

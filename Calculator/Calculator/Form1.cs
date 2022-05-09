@@ -32,7 +32,6 @@ namespace Calculator
         {
             double text1;
             string ttt = text.Split(',')[0];
-            text1 = Convert.ToDouble(ttt);
             string zel;
             long temp;
             temp = Convert.ToInt64(ttt, flagSystemAfter);
@@ -104,7 +103,7 @@ namespace Calculator
 
             string drob = null;
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 7; i++)
             {
                 switch (cc)
                 {
@@ -797,44 +796,228 @@ namespace Calculator
         private void button25_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("", "Вы ввели " + flagSystemAfter + "-ичное число?", MessageBoxButtons.YesNo);
-            float checkTwoPart = float.Parse(textBox1.Text);
+            float checkTwoPart = 0;
             if (dialogResult == DialogResult.Yes)
             {
-                for (int i = 0; i < textBox1.Text.Length; i++)
+                if (label1.Text.Substring(0, label1.Text.Length - 1).Split(',').Length<2 && textBox1.Text.Split(',').Length<2) 
                 {
-                    if (flagSystemAfter == 16)
+                    for (int i = 0; i < textBox1.Text.Length; i++)
                     {
-                        int Num;
-                        bool isNum = int.TryParse(textBox1.Text[i].ToString(), out Num);
-                        if (!isNum && (textBox1.Text[i].ToString().ToUpper() != "A" || textBox1.Text[i].ToString().ToUpper() != "B"
-                            || textBox1.Text[i].ToString().ToUpper() != "C" || textBox1.Text[i].ToString().ToUpper() != "D" || textBox1.Text[i].ToString().ToUpper() != "E" || textBox1.Text[i].ToString().ToUpper() != "F"))
+                        if (flagSystemAfter == 16)
                         {
-                            MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
-                            return;
+                            int Num;
+                            bool isNum = int.TryParse(textBox1.Text[i].ToString(), out Num);
+                            if (!isNum && !(textBox1.Text[i].ToString().ToUpper() != "A" || textBox1.Text[i].ToString().ToUpper() != "B"
+                                || textBox1.Text[i].ToString().ToUpper() != "C" || textBox1.Text[i].ToString().ToUpper() != "D" || textBox1.Text[i].ToString().ToUpper() != "E" || textBox1.Text[i].ToString().ToUpper() != "F"))
+                            {
+                                MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                return;
+                            }
+
+
                         }
+                        else
+                        {
+                            if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
+                            {
+
+                                MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                return;
+                            }
+                        }
+                    }
+                    checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                    for (int i = 0; i < label1.Text.Substring(0, label1.Text.Length - 1).Length; i++)
+                    {
+                        if (flagSystemAfter == 16)
+                        {
+                            int Num;
+                            bool isNum = int.TryParse(label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString(), out Num);
+                            if (!isNum && !(label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString().ToUpper() != "A" || label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString().ToUpper() != "B"
+                                || label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString().ToUpper() != "C" || label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString().ToUpper() != "D" || label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString().ToUpper() != "E" || label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString().ToUpper() != "F"))
+                            {
+                                MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                return;
+                            }
 
 
+                        }
+                        else
+                        {
+                            if (int.Parse(label1.Text.Substring(0, label1.Text.Length - 1).ToString()) > flagSystemAfter - 1)
+                            {
+
+                                MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                return;
+                            }
+                        }
+                    }
+                    a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter); 
+                }
+                else
+                {
+                    if(label1.Text.Substring(0, label1.Text.Length - 1).Split(',').Length == 2)
+                    {
+                        for (int ch = 0; ch < 2; ch++)
+                        {
+                            for (int i = 0; i < label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch].Length; i++)
+                            {
+                                if (flagSystemAfter == 16)
+                                {
+                                    int Num;
+                                    bool isNum = int.TryParse(label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString(), out Num);
+                                    if (!isNum && !(label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString().ToUpper() != "A" || label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString().ToUpper() != "B"
+                                        || label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString().ToUpper() != "C" || label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString().ToUpper() != "D" || label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString().ToUpper() != "E" || label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString().ToUpper() != "F"))
+                                    {
+                                        MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                        return;
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    if (int.Parse(label1.Text.Substring(0, label1.Text.Length - 1).Split(',')[ch][i].ToString()) > flagSystemAfter - 1)
+                                    {
+
+                                        MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        a = double.Parse(converToTenWithDouble(label1.Text.Substring(0, label1.Text.Length - 1)));
                     }
                     else
                     {
-                        if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
+                        for (int i = 0; i < label1.Text.Substring(0, label1.Text.Length - 1).Length; i++)
                         {
+                            if (flagSystemAfter == 16)
+                            {
+                                int Num;
+                                bool isNum = int.TryParse(textBox1.Text[i].ToString(), out Num);
+                                if (!isNum && !(textBox1.Text[i].ToString().ToUpper() != "A" || textBox1.Text[i].ToString().ToUpper() != "B"
+                                    || textBox1.Text[i].ToString().ToUpper() != "C" || textBox1.Text[i].ToString().ToUpper() != "D" || textBox1.Text[i].ToString().ToUpper() != "E" || textBox1.Text[i].ToString().ToUpper() != "F"))
+                                {
+                                    MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                    return;
+                                }
 
-                            MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
-                            return;
+
+                            }
+                            else
+                            {
+                                if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
+                                {
+
+                                    MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                    return;
+                                }
+                            }
                         }
+                        a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
+
+                    }
+                    if (textBox1.Text.Split(',').Length == 2)
+                    {
+                        for (int ch = 0; ch < 2; ch++)
+                        {
+                            for (int i = 0; i < textBox1.Text.Split(',')[ch].Length; i++)
+                            {
+                                if (flagSystemAfter == 16)
+                                {
+                                    int Num;
+                                    bool isNum = int.TryParse(textBox1.Text[i].ToString(), out Num);
+                                    if (!isNum && !(textBox1.Text.Split(',')[ch][i].ToString().ToUpper() != "A" || textBox1.Text.Split(',')[ch][i].ToString().ToUpper() != "B"
+                                        || textBox1.Text.Split(',')[ch][i].ToString().ToUpper() != "C" || textBox1.Text.Split(',')[ch][i].ToString().ToUpper() != "D" || textBox1.Text.Split(',')[ch][i].ToString().ToUpper() != "E" || textBox1.Text.Split(',')[ch][i].ToString().ToUpper() != "F"))
+                                    {
+                                        MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                        return;
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
+                                    {
+
+                                        MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        checkTwoPart = float.Parse(converToTenWithDouble(textBox1.Text));
+                    }
+                    else
+                    {
+                        for (int i = 0; i < textBox1.Text.Split(',').Length; i++)
+                        {
+                            if (flagSystemAfter == 16)
+                            {
+                                int Num;
+                                bool isNum = int.TryParse(textBox1.Text[i].ToString(), out Num);
+                                if (!isNum && !(textBox1.Text.Split(',')[i].ToString().ToUpper() != "A" || textBox1.Text.Split(',')[i].ToString().ToUpper() != "B"
+                                    || textBox1.Text.Split(',')[i].ToString().ToUpper() != "C" || textBox1.Text.Split(',')[i].ToString().ToUpper() != "D" || textBox1.Text.Split(',')[i].ToString().ToUpper() != "E" || textBox1.Text.Split(',')[i].ToString().ToUpper() != "F"))
+                                {
+                                    MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                    return;
+                                }
+
+
+                            }
+                            else
+                            {
+                                if (int.Parse(textBox1.Text[i].ToString()) > flagSystemAfter - 1)
+                                {
+
+                                    MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");
+                                    return;
+                                }
+                            }
+                        }
+                        checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
                     }
                 }
-                checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
-                a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
             }
             else if (dialogResult == DialogResult.No)
             {
-                long convertTwoPart = long.Parse(textBox1.Text);
-                string convertMy = Convert.ToString(convertTwoPart, flagSystemAfter);
-                checkTwoPart = float.Parse(convertMy);
-                //checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
-                a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
+                if (flagSystemAfter == 10)
+                {
+                    long convertTwoPart = long.Parse(textBox1.Text);
+                    //checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                    a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
+                }
+                if (label1.Text.Substring(0, label1.Text.Length - 1).Split(',').Length == 1 && textBox1.Text.Split(',').Length==1)
+                {
+                    long convertTwoPart = long.Parse(textBox1.Text);
+                    string convertMy = Convert.ToString(convertTwoPart, flagSystemAfter);
+                    checkTwoPart = float.Parse(convertMy);
+                    //checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                    a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter); 
+                }
+                else
+                {
+                    if (textBox1.Text.Split(',').Length == 2)
+                    {
+                        checkTwoPart = float.Parse(converToTenWithDouble(textBox1.Text));
+                    }
+                    else
+                    {
+                        checkTwoPart = Convert.ToInt64(textBox1.Text, flagSystemAfter);
+                    }
+                    if (label1.Text.Substring(0, label1.Text.Length - 1).Split(',').Length == 2)
+                    {
+                        a = double.Parse(converToTenWithDouble(label1.Text.Substring(0, label1.Text.Length - 1)));
+                    }
+                    else
+                    {
+                        a = Convert.ToInt64(label1.Text.Substring(0, label1.Text.Length - 1), flagSystemAfter);
+                    }
+                }
+
+
             }
             try
             {
