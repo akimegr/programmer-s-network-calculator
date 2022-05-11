@@ -844,7 +844,7 @@ namespace Calculator
                         }
                         else
                         {
-                            if (int.Parse(label1.Text.Substring(0, label1.Text.Length - 1).ToString()) > flagSystemAfter - 1)
+                            if (int.Parse(label1.Text.Substring(0, label1.Text.Length - 1)[i].ToString()) > flagSystemAfter - 1)
                             {
 
                                 MessageBox.Show("Ошибка, вы ввели не " + flagSystemAfter + "-ичное число!\nВычисления не произведены");

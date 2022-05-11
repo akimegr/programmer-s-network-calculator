@@ -17,7 +17,7 @@ namespace serverCons
 
         static void Main(string[] args)
         {
-            Console.WriteLine("UDP CHAT SERVER VERSION 3");
+            Console.WriteLine("SERVER VERSIO1 1");
             Console.Write("Введите порт для приема сообщений: ");
             localPort = Int32.Parse(Console.ReadLine());
             Console.WriteLine();
