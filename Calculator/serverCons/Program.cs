@@ -14,6 +14,7 @@ namespace serverCons
         static Socket listeningSocket; // Сокет
 
         static List<IPEndPoint> clients = new List<IPEndPoint>(); // Список "подключенных" клиентов
+       static  int flagSystemAfter;
 
         static void Main(string[] args)
         {
@@ -52,7 +53,7 @@ namespace serverCons
                 {
                     StringBuilder builder = new StringBuilder(); // получаем сообщение
                     int bytes = 0; // количество полученных байтов
-                    byte[] data = new byte[256]; // буфер для получаемых данных
+                    byte[] data = new byte[1000]; // буфер для получаемых данных
                     EndPoint remoteIp = new IPEndPoint(IPAddress.Any, 0); //адрес, с которого пришли данные
 
                     do
@@ -88,6 +89,201 @@ namespace serverCons
             }
         }
 
+        static string converToTenWithDouble(string text)
+        {
+            double text1;
+            string ttt = text.Split(',')[0];
+            string zel;
+            long temp;
+            temp = Convert.ToInt64(ttt, flagSystemAfter);
+            zel = temp.ToString() + ",";
+            string textZ = text.Split(',')[1];
+            int size = textZ.ToString().Length - 1;
+            string forFor = textZ.ToString();
+            double fff = 0;
+            for (int z = 0; z < forFor.Length; z++)
+            {
+                if (flagSystemAfter == 16)
+                {
+                    if (forFor[z].ToString().ToUpper() == "A")
+                    {
+                        fff += (10 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "B")
+                    {
+                        fff += (11 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "C")
+                    {
+                        fff += (12 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "D")
+                    {
+                        fff += (13 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "E")
+                    {
+                        fff += (14 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                    if (forFor[z].ToString().ToUpper() == "F")
+                    {
+                        fff += (15 * Math.Pow(flagSystemAfter, -(z + 1)));
+                        continue;
+                    }
+                }
+                fff += (int.Parse(forFor[z].ToString()) * Math.Pow(flagSystemAfter, -(z + 1)));
+            }
+            double myRes = Math.Round((temp + fff), 10);
+            return myRes.ToString();
+        }
+
+        static string withDouble(string text, int ss, int after, string str)
+        {
+            string[] listTake = str.Split('&');
+            flagSystemAfter = int.Parse(listTake[3]);
+            if (listTake[3] != "10")
+            {
+                text = converToTenWithDouble(listTake[2]);
+            }
+            double text1;
+            text1 = Convert.ToDouble(text);
+            string zel;
+            long temp;
+            if (ss == 10)
+            {
+                return converToTenWithDouble(listTake[2]);
+            }
+            else
+            {
+                zel = Convert.ToString(Convert.ToInt32(Math.Truncate(text1)), ss);
+            }
+            int zel1 = Convert.ToInt32(Math.Truncate(text1));
+            // дробную часть
+            double text2;
+            text2 = text1 - Math.Truncate(text1);
+            int cc;
+            cc = ss;
+            double[] asd = new double[10];
+            asd[0] = text2;
+
+            string drob = null;
+
+            for (int i = 1; i < 7; i++)
+            {
+                switch (cc)
+                {
+                    case 2:
+                        asd[i] = (2 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 2);
+                        int bin = Convert.ToInt32(Math.Truncate(asd[i - 1] * 2));
+                        drob += bin;
+                        break;
+                    case 8:
+                        asd[i] = (8 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 8);
+                        double oct = Math.Truncate(asd[i - 1] * 8);
+                        drob += oct;
+                        break;
+                    case 10:
+                        asd[i] = (10 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 10);
+                        double dec = Math.Truncate(asd[i - 1] * 10);
+                        drob += dec;
+                        break;
+                    case 16:
+                        asd[i] = (16 * asd[i - 1]) - Math.Truncate(asd[i - 1] * 16);
+                        string hex;
+                        hex = Convert.ToString(Math.Truncate(asd[i - 1] * 16));
+
+                        int ze;
+                        ze = Convert.ToInt32(hex);
+
+                        switch (ze)
+                        {
+                            case 10:
+                                hex = "A";
+                                break;
+                            case 11:
+                                hex = "B";
+                                break;
+                            case 12:
+                                hex = "C";
+                                break;
+                            case 13:
+                                hex = "D";
+                                break;
+                            case 14:
+                                hex = "E";
+                                break;
+                            case 15:
+                                hex = "F";
+                                break;
+                            default:
+                                break;
+                        }
+                        drob += hex;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+            string r = zel + "," + drob;
+            string otvet = r + "&" + cc;
+            return otvet;
+
+        }
+
+        static string changeInSS(int ss, string str)
+        {
+            try
+            {
+                string[] listTake = str.Split('&');
+                float a = float.Parse(listTake[0]);
+                float behavior = float.Parse(listTake[1]);
+                float b = float.Parse(listTake[2]);
+                int flagSystemAfter = int.Parse(listTake[3]);
+                float result = 0;
+                string res;
+                if (listTake[2].Split(',').Length == 2)
+                {
+                    res = withDouble(listTake[2], ss, flagSystemAfter, str);
+                    res += "&" + ss;
+                    return res;
+                }
+                long temp = Convert.ToInt64(listTake[2], flagSystemAfter);
+                res = Convert.ToString(temp, ss);
+                res += "&" + ss;
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return ("Введите доступные числа");
+            }
+
+            //if (flagSystemAfter == 10)
+            //{
+            //    int i = Convert.ToInt32(textBox1.Text);
+            //    textBox1.Text = Convert.ToString(i, ss);
+            //    flagSystemSS = ss;
+            //}
+            //else if (flagSystemAfter == 2)
+            //{
+
+            //}
+            //else if (flagSystemAfter == 8)
+            //{
+            //    long temp = Convert.ToInt64(textBox1.Text, 8);
+            //    textBox1.Text = Convert.
+            //}
+            //else if (flagSystemAfter == 16)
+            //{
+
+            //}
+        }
+
         private static void calculate(string take, IPEndPoint remoteFullIp)
         {
             string[] listTake = take.Split('&');
@@ -96,6 +292,7 @@ namespace serverCons
             float b = float.Parse(listTake[2]);
             int flagSystemAfter = int.Parse(listTake[3]);
             float result = 0;
+            string forSS;
             switch (behavior)
             {
                 case 1:
@@ -111,6 +308,31 @@ namespace serverCons
                 case 4:
                     result = a / b;
                     break;
+                case 5:
+                    forSS = changeInSS(2, take);
+                    result = float.Parse(forSS.Split("&")[0]);
+                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    return;
+                    break;
+                case 6:
+                    forSS = changeInSS(8, take);
+                    result = float.Parse(forSS.Split("&")[0]);
+                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    return;
+                    break;
+                case 7:
+                    forSS = changeInSS(16, take);
+                    result = float.Parse(forSS.Split("&")[0]);
+                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    return;
+                    break;
+                case 8:
+                    forSS = changeInSS(10, take);
+                    result = float.Parse(forSS.Split("&")[0]);
+                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    return;
+                    break;
+
 
                 default:
                     break;
@@ -122,7 +344,7 @@ namespace serverCons
             }
             else
             {
-                if (result.ToString().Split(',').Length==1)
+                if (result.ToString().Split(',').Length == 1)
                 {
                     string result1 = Convert.ToString(resultL, flagSystemAfter);
                     BroadcastMessage(result1, remoteFullIp.Address.ToString());
@@ -142,8 +364,8 @@ namespace serverCons
             text1 = Convert.ToDouble(text);
             string zel;
             long temp;
-                zel = Convert.ToString(Convert.ToInt32(Math.Truncate(text1)), ss);
-            
+            zel = Convert.ToString(Convert.ToInt32(Math.Truncate(text1)), ss);
+
             int zel1 = Convert.ToInt32(Math.Truncate(text1));
             // дробную часть
             double text2;

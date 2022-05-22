@@ -473,6 +473,7 @@
             this.IP.Name = "IP";
             this.IP.Size = new System.Drawing.Size(255, 50);
             this.IP.TabIndex = 32;
+            this.IP.Text = "127.0.0.1";
             // 
             // PORT
             // 
@@ -481,6 +482,7 @@
             this.PORT.Name = "PORT";
             this.PORT.Size = new System.Drawing.Size(251, 50);
             this.PORT.TabIndex = 33;
+            this.PORT.Text = "7500";
             // 
             // label5
             // 

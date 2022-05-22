@@ -236,6 +236,34 @@ namespace Calculator
 
         private void button24_Click(object sender, EventArgs e)
         {
+            float partTwo = float.Parse(textBox1.Text);
+            string forSend = a.ToString();
+            forSend += "&";
+            forSend += 5;
+            forSend += "&";
+            forSend += textBox1.Text;
+            forSend += "&";
+            forSend += flagSystemAfter.ToString();
+
+            label4.Text = forSend;
+
+            string message = forSend;
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            EndPoint remotePoint = new IPEndPoint(ipAddress, remotePort);
+            listeningSocket.SendTo(data, remotePoint);
+
+            StringBuilder builder = new StringBuilder(); // получаем сообщение
+            int bytes = 0; // количество полученных байтов
+            byte[] data2 = new byte[1000]; // буфер для получаемых данных
+            EndPoint remoteIp = new IPEndPoint(ipAddress, 0); //адрес, с которого пришли данные
+
+            do
+            {
+                bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            }
+            while (listeningSocket.Available > 0);
+            MessageBox.Show(builder.ToString());
             changeInSS(2);
             radioButton2.Checked = true;
 
@@ -245,6 +273,36 @@ namespace Calculator
         {
             //int i = Convert.ToInt32(textBox1.Text);
             //textBox1.Text = Convert.ToString(i, 8);
+            float partTwo = float.Parse(textBox1.Text);
+            string forSend = a.ToString();
+            forSend += "&";
+            forSend += 6;
+            forSend += "&";
+            forSend += textBox1.Text;
+            forSend += "&";
+            forSend += flagSystemAfter.ToString();
+
+            label4.Text = forSend;
+
+            string message = forSend;
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            EndPoint remotePoint = new IPEndPoint(ipAddress, remotePort);
+            listeningSocket.SendTo(data, remotePoint);
+
+            StringBuilder builder = new StringBuilder(); // получаем сообщение
+            int bytes = 0; // количество полученных байтов
+            byte[] data2 = new byte[1000]; // буфер для получаемых данных
+            EndPoint remoteIp = new IPEndPoint(ipAddress, 0); //адрес, с которого пришли данные
+
+            do
+            {
+                bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            }
+            while (listeningSocket.Available > 0);
+            MessageBox.Show(builder.ToString());
+            changeInSS(2);
+            radioButton2.Checked = true;
             changeInSS(8);
             radioButton3.Checked = true;
         }
@@ -253,6 +311,36 @@ namespace Calculator
         {
             //int i = Convert.ToInt32(textBox1.Text);
             //textBox1.Text = Convert.ToString(i, 16);
+            float partTwo = float.Parse(textBox1.Text);
+            string forSend = a.ToString();
+            forSend += "&";
+            forSend += 7;
+            forSend += "&";
+            forSend += textBox1.Text;
+            forSend += "&";
+            forSend += flagSystemAfter.ToString();
+
+            label4.Text = forSend;
+
+            string message = forSend;
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            EndPoint remotePoint = new IPEndPoint(ipAddress, remotePort);
+            listeningSocket.SendTo(data, remotePoint);
+
+            StringBuilder builder = new StringBuilder(); // получаем сообщение
+            int bytes = 0; // количество полученных байтов
+            byte[] data2 = new byte[1000]; // буфер для получаемых данных
+            EndPoint remoteIp = new IPEndPoint(ipAddress, 0); //адрес, с которого пришли данные
+
+            do
+            {
+                bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            }
+            while (listeningSocket.Available > 0);
+            MessageBox.Show(builder.ToString());
+            changeInSS(2);
+            radioButton2.Checked = true;
             changeInSS(16);
             radioButton4.Checked = true;
         }
@@ -1039,7 +1127,7 @@ namespace Calculator
 
                 StringBuilder builder = new StringBuilder(); // получаем сообщение
                 int bytes = 0; // количество полученных байтов
-                byte[] data2 = new byte[256]; // буфер для получаемых данных
+                byte[] data2 = new byte[1000]; // буфер для получаемых данных
                 EndPoint remoteIp = new IPEndPoint(ipAddress, 0); //адрес, с которого пришли данные
 
                 do
