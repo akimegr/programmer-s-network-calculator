@@ -311,25 +311,25 @@ namespace serverCons
                 case 5:
                     forSS = changeInSS(2, take);
                     result = float.Parse(forSS.Split("&")[0]);
-                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    sendMessage(result.ToString(), remoteFullIp.Address.ToString());
                     return;
                     break;
                 case 6:
                     forSS = changeInSS(8, take);
                     result = float.Parse(forSS.Split("&")[0]);
-                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    sendMessage(result.ToString(), remoteFullIp.Address.ToString());
                     return;
                     break;
                 case 7:
                     forSS = changeInSS(16, take);
                     result = float.Parse(forSS.Split("&")[0]);
-                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    sendMessage(result.ToString(), remoteFullIp.Address.ToString());
                     return;
                     break;
                 case 8:
                     forSS = changeInSS(10, take);
                     result = float.Parse(forSS.Split("&")[0]);
-                    BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                    sendMessage(result.ToString(), remoteFullIp.Address.ToString());
                     return;
                     break;
 
@@ -340,19 +340,19 @@ namespace serverCons
             long resultL = (long)(result);
             if (flagSystemAfter == 10)
             {
-                BroadcastMessage(result.ToString(), remoteFullIp.Address.ToString());
+                sendMessage(result.ToString(), remoteFullIp.Address.ToString());
             }
             else
             {
                 if (result.ToString().Split(',').Length == 1)
                 {
                     string result1 = Convert.ToString(resultL, flagSystemAfter);
-                    BroadcastMessage(result1, remoteFullIp.Address.ToString());
+                    sendMessage(result1, remoteFullIp.Address.ToString());
                 }
                 else
                 {
                     string result1 = withDouble(result.ToString(), flagSystemAfter);
-                    BroadcastMessage(result1, remoteFullIp.Address.ToString());
+                    sendMessage(result1, remoteFullIp.Address.ToString());
                 }
             }
         }
@@ -440,7 +440,7 @@ namespace serverCons
         }
 
         // Метод для рассылки сообщений
-        private static void BroadcastMessage(string message, string ip)
+        private static void sendMessage(string message, string ip)
         {
             byte[] data = Encoding.Unicode.GetBytes(message); // Формируем байты из текста
 
